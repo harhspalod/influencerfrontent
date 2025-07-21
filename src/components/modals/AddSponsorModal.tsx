@@ -72,8 +72,13 @@ const AddSponsorModal: React.FC<AddSponsorModalProps> = ({
 			onClose();
 		} catch (error) {
 			console.error(error);
-			alert(`Error creating sponsor: ${error.message}`);
-		} finally {
+			if (error instanceof Error) {
+				alert(`Error creating sponsor: ${error.message}`);
+			} else {
+				alert("An unknown error occurred.");
+			}
+		}
+		finally {
 			setIsSubmitting(false);
 		}
 	};
